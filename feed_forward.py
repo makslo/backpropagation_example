@@ -1,25 +1,15 @@
 import math
 
-eta = 0.5
+class FeedForwardNN:
+    def __init__(self):
+        self.eta = 0.5
+        self.t = [0.01, 0.99]
+        self.i = [0.05, 0.1]
+        self.w1 = [0.15, 0.2, 0.25, 0.3]
+        self.w2 = [0.4, 0.45, 0.50, 0.55]
+        self.b = [0.35, 0.6]
 
-t1 = 0.01
-t2 = 0.99
-
-i1 = 0.05
-i2 = 0.1
-
-w1 = 0.15
-w2 = 0.2
-w3 = 0.25
-w4 = 0.3
-
-w5 = 0.4
-w6 = 0.45
-w7 = 0.50
-w8 = 0.55
-
-b1 = 0.35
-b2 = 0.6
+ffnn = FeedForwardNN()
 
 for x in range(0, 10000):
 
