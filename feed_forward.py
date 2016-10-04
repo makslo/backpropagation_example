@@ -1,32 +1,63 @@
-import math
+import math, random
 
+class Neuron:
+    def __init__(self, w, b):
+        self.w = w
+        self.b = b
+
+    def set_out(inp):
+        s = sum([i*w for i,w in zip(inp,self.w)])+b
+        self.inp = inp
+        self.out = 1/(1+math.exp(-s))
+        self.diff = self.out*(1-self.out)
+        return self.out
+
+# fully connected multilayer feed forward network
 class FeedForwardNN:
-    def __init__(self):
-        self.eta = 0.5
-        self.t = [0.01, 0.99]
-        self.i = [0.05, 0.1]
-        self.w1 = [0.15, 0.2, 0.25, 0.3]
-        self.w2 = [0.4, 0.45, 0.50, 0.55]
-        self.b = [0.35, 0.6]
+    def __init__(self, target, inputs, eta):
+        self.eta = eta
+        self.inputs = inputs
+        self.layers = []
+        self.target = target
+        self.connections = []
+        self.out = []
 
-ffnn = FeedForwardNN()
+    def get_n(layer,pos):
+        return layers[layer][pos]
+
+    def add_layer(layer):
+        self.layers.append(layer)
+
+    def predict():
+        inp = self.inputs
+        for layer in self.layers:
+            out = []
+            for n in layer:
+                out.append(n.set_out(inp))
+            inp = out
+        self.out = inp
+        return self.out
+
+    def error():
+        return 0.5*sum([math.pow((t-o),2) for t,o in zip(self.target, self.out)])
+
+    def train():
+        d_e = [-(t-o) for t,o in zip(self.target, self.out)]
+        updates = []
+        for layer in layers:
+            d_layer = [map(lambda i: i*n.diff, n.inp) for n in layer]
+            updates.append([-self.eta*d for d in d_layer])
+
+
+ffnn = FeedForwardNN(target = [0.01, 0.99], inputs = [0.05, 0.1], eta = 0.5)
+ffnn.add_layer([Neuron([random.random()],random.random()] random.random()), Neuron([random.random()],random.random()] random.random()))
+ffnn.add_layer([Neuron([random.random()],random.random()] random.random()), Neuron([random.random()],random.random()] random.random()))
+
 
 for x in range(0, 10000):
-
-  net_h1 = w1*i1+w2*i2+b1
-  out_h1 = 1/(1+math.exp(-net_h1))
-
-  net_h2 = w3*i1+w4*i2+b1
-  out_h2 = 1/(1+math.exp(-net_h2))
-
-  net_o1 = w5*out_h1+w6*out_h2+b2
-  out_o1 = 1/(1+math.exp(-net_o1))
-
-  net_o2 = w7*out_h1+w8*out_h2+b2
-  out_o2 = 1/(1+math.exp(-net_o2))
-
-  e_total = 0.5*math.pow((t1-out_o1),2)+0.5*math.pow((t2-out_o2),2)
-
+    ffnn.predict()
+    print(ffnn.error())
+         = d_e[0]*n0.diff*n0.inp[0]
   de_dw5 = (out_o1-t1)*out_o1*(1-out_o1)*out_h1
   w5_new = w5-eta*de_dw5
 
@@ -39,6 +70,7 @@ for x in range(0, 10000):
   de_dw8 = (out_o2-t2)*out_o2*(1-out_o2)*out_h2
   w8_new = w8-eta*de_dw8
 
+  (d_e[0]*n0.diff*n0.weights[0]+d_e[1]*n1.diff*n1.weights[0])*nh0.diff*inpt[0]
   de_dw1 = (((out_o1-t1)*out_o1*(1-out_o1)*w5)+((out_o2-t2)*out_o2*(1-out_o2)*w7))*out_h1*(1-out_h1)*i1
   w1_new = w1-eta*de_dw1
 
