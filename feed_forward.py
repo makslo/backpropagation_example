@@ -74,8 +74,6 @@ ffnn.predict()
 
 result = {"error": [ffnn.error()], "out0": [ffnn.out[0]], "out1": [ffnn.out[1]]}
 
-
-
 for i in range(100):
     ffnn.train()
     ffnn.update()
