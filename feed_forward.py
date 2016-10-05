@@ -64,16 +64,19 @@ class FeedForwardNN:
                 n.set_diff(d) # update n's gradient
             d_layer = [[n.diff*w for w in n.weights] for n in layer] # backpropagate for next layer
 
-ffnn = FeedForwardNN(target = [0.01, 0.99], inputs = [0.05, 0.1], eta = 0.5)
+ffnn = FeedForwardNN(target = [0.35, 0.2], inputs = [0.05, 0.1], eta = 0.5)
 
 ffnn.add_layer([Neuron(2),Neuron(2),Neuron(2)]) # hidden 1
 ffnn.add_layer([Neuron(3),Neuron(3),Neuron(3)]) # hidden 2
 ffnn.add_layer([Neuron(3),Neuron(3)])            # output
 
 ffnn.predict()
+
 result = {"error": [ffnn.error()], "out0": [ffnn.out[0]], "out1": [ffnn.out[1]]}
 
-for i in range(1000):
+
+
+for i in range(100):
     ffnn.train()
     ffnn.update()
     ffnn.predict()
